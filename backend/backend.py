@@ -26,7 +26,7 @@ async def pong():
 
 @api_app.get("/files", response_model=list[File])
 async def get_files(session: AsyncSession = Depends(get_session)):
-    result = await session.execute(select(File))
+    result = await session.exec(select(File))
     images = result.scalars().all()
     return [File(name=image.name, path=image.path, img_type=image.img_type, id=image.id) for image in images]
 
@@ -86,28 +86,23 @@ async def get_file(path: str):
 @api_app.delete("/deleteFile/{fileId}", status_code=204)
 async def delete_file(fileId: int, fileDelete: FileDelete):
     """Delete file"""
-    filePath = Path(fileDelete.model_dump().get("filePath", None))
+    filePath = Path(fileDelete.model_dump().get("filePath", "/path/to/anywhere/that/doesnt/exist"))
 
-    if filePath and filePath.is_file():
-        file = Path(filePath)
-        if not file.exists():
-            raise HTTPException(status_code=404, detail="File not found")
-        else:
-            # Remove entry from DB
-            mode = settings.get_mode()
-            if mode == "db" or mode == "both":
-                session = get_session()
-                session.exec(delete(File).where(File.id == fileId))
-                print("Deleting from DB")
-                print(f"  - delete entry {fileId} from database")
-                session.commit()
-            # Delete file from filesystem
-            if mode == "fs" or mode == "both":
-                print("Deleting from FS")
-                print(f"  - delete {filePath} from disk")
-                filePath.unlink(missing_ok=True)
-    else:
-        return {"ok": False}
+    # Remove entry from DB
+    mode = settings.get_mode()
+    if mode == "db" or mode == "all":
+        session = get_session()
+        session.exec(delete(File).where(File.id == int(fileId)))
+        print("Deleting from DB")
+        print(f"  - delete entry {fileId} from database")
+        session.commit()
+
+    # Delete file from filesystem
+    if mode == "fs" or mode == "all":
+        print("Deleting from FS")
+        print(f"  - delete {filePath} from disk")
+        filePath.unlink(missing_ok=True)
+    
     return {"ok": True}
 
 

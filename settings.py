@@ -1,7 +1,13 @@
 import json
 import os
+import sys
 
 from pathlib import Path
+
+from rich.console import Console
+
+
+console = Console()
 
 
 cfg_file = "settings.json"
@@ -9,7 +15,7 @@ cfg_file = "settings.json"
 default = {
     "home_dir": f"{Path.home()}",
     "database_url": "sqlite:///./deldup.sqlite3",
-    "mode": "none",  # none, db, fs, both
+    "mode": "none",  # none, db, fs, all
     "categories": {
         "images": {
             "code": "img",
@@ -47,11 +53,6 @@ def has_settings():
     return True
 
 
-if not has_settings():
-    with open(cfg_file, "w") as cfg:
-        cfg.write(json.dumps(default, indent=4))
-
-
 if has_settings():
     with open(cfg_file, "r") as cfg:
         settings = json.loads(cfg.read())
@@ -87,3 +88,12 @@ def get_ext_code():
 
 def get_mode():
     return settings.get("mode")
+
+
+if not has_settings():
+    console.print("[green]Settings file[/green]", cfg_file, "[green]was[/green] [red bold]not[/][green] found.[/green]")
+    console.print("[green]Creating[/green]", cfg_file, "[green]file[/green]")
+    with open(cfg_file, "w") as cfg:
+        cfg.write(json.dumps(default, indent=4))
+    console.print("[green]Please, review the[/green]", cfg_file, "[green]file. Then, run this app again.[/green]")
+    sys.exit()
