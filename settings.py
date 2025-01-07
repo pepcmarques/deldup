@@ -5,6 +5,7 @@ import sys
 from pathlib import Path
 
 from rich.console import Console
+from rich.table import Table
 
 
 console = Console()
@@ -96,10 +97,26 @@ def get_mode():
     return settings.get("mode")
 
 
+def print_mode_values_table():
+    table = Table(title="Possible 'mode' values in settings.json")
+
+    table.add_column("Value", justify="right", style="cyan", no_wrap=True)
+    table.add_column("Description", style="magenta")
+    
+    table.add_row("none", "Remove file visually only")
+    table.add_row("db", "Remove file entry from DB.")
+    table.add_row("fs", "Remove file from the file system.")
+    table.add_row("all", "Remove file entry from DB and remove file from the file system")
+
+    console.print("Mode values documentation")
+    console.print(table)
+
+
 if not has_settings():
     console.print("[green]Settings file[/green]", cfg_file, "[green]was[/green] [red bold]not[/][green] found.[/green]")
     console.print("[green]Creating[/green]", cfg_file, "[green]file[/green]")
     with open(cfg_file, "w") as cfg:
         cfg.write(json.dumps(default, indent=4))
     console.print("[green]Please, review the[/green]", cfg_file, "[green]file. Then, run this app again.[/green]")
+    print_mode_values_table()
     sys.exit()
