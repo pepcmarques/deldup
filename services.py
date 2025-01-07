@@ -102,18 +102,18 @@ def populate_files(extensions_dict):
         #session.refresh(file)
     
 
-def get_categories_in_db():
+def get_codes_in_db():
     session = get_session()
-    categories = session.exec(select(File.filetype).distinct()).all()
-    return categories
+    codes = session.exec(select(File.filetype).distinct()).all()
+    return codes
 
 
 def populate_categories(categories):
     console.print("[green]Populating...[/green]")
     tmp = {}
     for category in categories:
-        code = settings.get_categories()[category]["code"]
-        exts = settings.get_categories()[category]["ext"]
+        code = category["code"]
+        exts = category["ext"]
         for ext in exts:
             tmp[ext] = code
     populate_files(tmp)
@@ -141,10 +141,10 @@ def get_directory_contents(directory: Path):
     if not directory.is_dir():
         raise HTTPException(status_code=404, detail="Directory not found")
 
-    categories_in_db = get_categories_in_db()
+    codes_in_db = get_codes_in_db()
     extensions = []
-    for cat_in_db in categories_in_db:
-        extensions.extend(settings.get_extensions(cat_in_db))
+    for code_in_db in codes_in_db:
+        extensions.extend(settings.get_extensions(code_in_db))
     
     # List files and directories in the given directory
     items = []

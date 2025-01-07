@@ -70,6 +70,12 @@ def get_home_dir():
     return settings.get("home_dir")
 
 
+def get_category_key_by_code(code):
+    for category_key, category_info in settings["categories"].items():
+        if category_info["code"] == code:
+            return category_key
+
+
 def get_categories_code():
     return [v["code"] for v in settings["categories"].values()]
 
