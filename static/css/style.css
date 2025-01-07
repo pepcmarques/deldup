@@ -1,0 +1,65 @@
+body {
+  background-color: black;
+  color: white;
+}
+
+#tree {
+  padding-left: 10px;
+}
+
+#root-folder {
+  font-weight: bold;
+  color: goldenrod;
+}
+
+.folder {
+  cursor: pointer;
+  font-weight: bold;
+  color: gold;
+  margin-top: 2px;
+}
+
+.file {
+  cursor: pointer;
+  margin-top: 2px;
+}
+
+.hidden {
+  display: none;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.tree-column {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex: 3;
+}
+
+.dd {
+  width: 20px;
+  height: 20px;
+}
+
+.row-dd {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#preview {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
