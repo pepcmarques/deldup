@@ -9,7 +9,7 @@ It allows you to verify if there are duplicated files in your file system. And, 
 1. Clone this project
 
 ```
-git clone https://github.com/pepcmarques/deldup.git
+git clone git@github.com:pepcmarques/deldup.git
 ```
 
 2. Go to the `deldup` directory
