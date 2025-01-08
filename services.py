@@ -50,11 +50,14 @@ def is_valid_file(entry, extensions):
 
 def scantree(path):
     try:
-        for entry in os.scandir(path):
-            if entry.is_dir(follow_symlinks=False):
-                yield from scantree(entry.path)
-            else:
-                yield entry
+        if os.path.exists(path): 
+            for entry in os.scandir(path):
+                if entry.is_dir(follow_symlinks=False):
+                    yield from scantree(entry.path)
+                else:
+                    yield entry
+        else:
+            yield None
     except PermissionError:
         yield None
 
@@ -83,6 +86,12 @@ def populate_files(extensions_dict):
             console.print("")
             console.print("[red]Unable to open:[/red]")
             console.print("  -", entry.path)
+            continue
+        except OSError:
+            console.print("")
+            console.print("[red]Unable to open:[/red]")
+            console.print("  -", entry.path)
+            console.print("[red]Probably a link to another directory?[/red]")
             continue
         
         ext = entry.name.split(".")[-1]

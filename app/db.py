@@ -20,7 +20,7 @@ def init_db():
 def populate_db():
     categories = settings.get_categories()
     categories_txt = ", ".join(categories.keys())
-    console.print("[green]Checking if[/green]", categories_txt, "[green]have files. If [bold]not[/bold], it will be created[/green]")
+    console.print("[green]Checking if[/green]", categories_txt, "[green]have entries in DB. If [bold]not[/bold], it will be created[/green]")
     codes_in_db = get_codes_in_db()
     codes_to_populate = set(settings.get_categories_code()).difference(set(codes_in_db))
     to_populate = []
