@@ -29,7 +29,7 @@ python -m venv .venv
 ```
 source .venv/bin/activate     # For Linux or Mac
 
-.venv/Scripts/activate.exe    # For Windows
+.venv\Scripts\activate        # For Windows
 ```
 
 5. Install dependencies
