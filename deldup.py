@@ -9,6 +9,8 @@ from app.db import init_db, populate_db
 from frontend.frontend import front_app
 from backend.backend import api_app
 
+import settings
+
 
 init_db()
 populate_db()
@@ -24,4 +26,4 @@ app.mount('/', front_app)
 
 if __name__ == '__main__':
     multiprocessing.freeze_support()  # For Windows support
-    uvicorn.run(app, host="0.0.0.0", port=8000, reload=False, workers=1)
+    uvicorn.run(app, host="0.0.0.0", port=settings.get_port(), reload=False, workers=1)

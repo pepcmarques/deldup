@@ -3,6 +3,7 @@
 
 settings.json
 *.sqlite3
+.vscode
 
 ### Python ###
 # Byte-compiled / optimized / DLL files

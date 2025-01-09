@@ -1,4 +1,4 @@
-const SERVER = "http://127.0.0.1:8000";
+const SERVER = window.location.origin;
 
 async function fetchData(apiUrl, argument = null) {
   let url = `${SERVER}/api/${apiUrl}`;

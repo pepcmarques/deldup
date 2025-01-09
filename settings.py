@@ -14,6 +14,7 @@ console = Console()
 cfg_file = "settings.json"
 
 default = {
+    "port": 8000,
     "home_dir": f"{Path.home()}",
     "database_url": "sqlite:///./deldup.sqlite3",
     "mode": "none",  # none, db, fs, all
@@ -110,6 +111,10 @@ def print_mode_values_table():
 
     console.print("Mode values documentation")
     console.print(table)
+
+
+def get_port():
+    return settings.get("port", 8000)
 
 
 if not has_settings():

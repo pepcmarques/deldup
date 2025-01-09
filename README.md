@@ -50,7 +50,8 @@ The configuration file looks like the one below:
 
 ```json
 {
-  "home_dir": "/Users/YOUR_USER_HERE",
+  "port": 8000,
+  "home_dir": "/path/to/your/home/directory",
   "database_url": "sqlite:///./deldup.sqlite3",
   "mode": "none",
   "categories": {
@@ -90,7 +91,9 @@ The second time and you run the project, it will recursivelly check all the file
 
 After populating the DB, it will allow you to connect to it using your browser.
 
-Open the browser and connect to `http://0.0.0.0:8000`
+Open the browser and connect to `http://0.0.0.0:8000` (on Mac) or `http://127.0.0.1:8000` (on Linux and Windows). You can also use your machine IP address.
+
+**Note**: The port must be the same as it is set in the configuration file.
 
 ## Technologies used in this project
 
@@ -105,7 +108,7 @@ In the project root, you will find the main program `deldup.py`, `services.py`, 
 
 ## How this project was implemented
 
-I used Fastapi for the API and pure JavaScript to be able to run it anywhere. The beuty of it is to generate one executable with `pyinstaller`.
+I used Fastapi for the API and pure JavaScript to be able to run it anywhere. The beauty of it is to generate one executable with `pyinstaller`.
 
 > I will prepare it asap for Mac, Linux, and Windows.
 
@@ -118,6 +121,7 @@ Python
 - Create an issue
 - Wait for this issue to be assigned to you
 - Develop the feature and make a PR
+
 
 ## Who contributed with this project
 
