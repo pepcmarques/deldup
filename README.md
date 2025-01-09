@@ -108,7 +108,7 @@ In the project root, you will find the main program `deldup.py`, `services.py`, 
 
 ## How this project was implemented
 
-I used Fastapi for the API and pure JavaScript to be able to run it anywhere. The beauty of it is to generate one executable with `pyinstaller`.
+I used Fastapi for the API and pure JavaScript to be able to run it anywhere. The beauty of it is that it allows you to generate one executable file with `pyinstaller`. So, it is not necessary to install anything, just run the executable.
 
 > I will prepare it asap for Mac, Linux, and Windows.
 
@@ -121,7 +121,6 @@ Python
 - Create an issue
 - Wait for this issue to be assigned to you
 - Develop the feature and make a PR
-
 
 ## Who contributed with this project
 
